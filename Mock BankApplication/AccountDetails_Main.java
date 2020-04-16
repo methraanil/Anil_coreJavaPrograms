@@ -10,7 +10,7 @@ public class AccountDetails_Main {
 		var accountDetails=new HashMap<Long,AccountDetails>();
 			Scanner sc=new Scanner(System.in);
 			
-		System.out.println("Please select the option:\n Y : For creating a new Account\n N : No need to Create a Account");
+		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
 		     char c;
 		     c=sc.next().charAt(0);
 		     while(c != 'N') {
@@ -72,16 +72,110 @@ public class AccountDetails_Main {
 				
 				
 				
-				System.out.println("Please select the option:\n Y : For creating a new Account\n N : No need to Create a Account");
+				System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
 				c=sc.next().charAt(0);
 		    	 }
-		    	 else if((c!='Y')&&(c!='N')) {
+		    	 else if(c=='E') {
+		    		 
+				    	 long an;
+				    	 System.out.println("Enter the Account Number");
+				    	 an=sc.nextLong();
+				    	 if(accountDetails.containsKey(an)) {
+				    		 AccountDetails details=new AccountDetails();
+				    		 details=accountDetails.get(an);
+				    				 
+				    		 System.out.println("Select the field \n1: Account Type\n2: Full Name\n3: Amount \n4: Currency Type ");
+				    		 int i;
+				    		 i=sc.nextInt();
+				    		 switch(i) {
+				    		 case 1:{
+				    			 if(details.getAccountType()=="Savings") {
+				    				 details.setAccountType("Current");
+				    				 System.out.println("*****Account type was updated from Savings to Current*****");
+				    				 accountDetails.put(an,details);
+				    				 DisplayDetails(details);
+				    				 break;
+				    			 }
+				    			 else {
+				    				 details.setAccountType("Savings");
+				    				 System.out.println("*****Account type was updated from Current to Savings*****");
+				    				 accountDetails.put(an,details);
+				    				 DisplayDetails(details);
+				    				 break;
+				    			 }
+				    		 }
+				    		 case 2:{
+				    			sc.nextLine();
+				    			 System.out.println("Enter the full name: ");
+				    			 details.setAccountName(sc.nextLine());
+				    			 accountDetails.put(an,details);
+				    			 System.out.println("*****NAME UPDATED SUCCESSFULLY*****");
+			    				 DisplayDetails(details);
+				    			 break;
+				    			 
+				    		 }
+				    		 case 3:{
+				    			 System.out.println("Enter the Amount: ");
+				    			 details.setAccountBalance(sc.nextDouble());
+				    			 accountDetails.put(an,details);
+				    			 System.out.println("*****AMOUNT UPDATED SUCCESSFULLY*****");
+			    				 DisplayDetails(details);
+				    			 break;
+				    		 }
+				    		 case 4:{
+				    			 System.out.println("Enter Currency Type: ");
+				    			 details.setCurrency(sc.next());
+				    			 System.out.println("*****CURRENCY UPDATED SUCCESSFULLY*****");
+			    				 DisplayDetails(details);
+				    			 break;
+				    		 }
+				    		default:{
+				    			System.out.println("Enter a valid option :");
+					    		 System.out.println("Select the field \n1: Account Type\n2: Full Name\n3: Amount \n4: Currency Type ");
+					    		 i=sc.nextInt();
+
+				    		}
+				    		 
+				    		 }
+				    			System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+								c=sc.next().charAt(0);
+				    	 }
+				    	 else {
+				    		 System.out.println("*****ACCOUNT NOT FOUND*****\n");
+					    	 System.out.println("_____________________________________________");
+					 		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+								c=sc.next().charAt(0);
+				    	 }
+				    	 
+				    	 
+				     }
+		    	 else if((c!='Y')&&(c!='N')&&(c != 'E')&&(c!='V')) {
 			    	 System.out.println("Invalid option choosen");
 			    	 System.out.println("_____________________________________________");
-			    	 System.out.println("Please select the option:\n Y : For creating a new Account\n N : No need to Create a Account");
+			 		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
 						c=sc.next().charAt(0);
 			     }
+		    	 else if(c=='V') {
+		    		 long an;
+		    		 System.out.println("Enter the Account Number");
+			    	 an=sc.nextLong();
+			    	 if(accountDetails.containsKey(an)) {
+			    		 AccountDetails details=new AccountDetails();
+			    		 details=accountDetails.get(an);
+			    		 DisplayDetails(details);
+			    		 System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+							c=sc.next().charAt(0);
+		    	 }
+			    	 else {
+			    		 System.out.println("*****ACCOUNT NOT FOUND*****\n");
+				    	 System.out.println("_____________________________________________");
+				 		System.out.println("Please select the option:\nY : For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+							c=sc.next().charAt(0);
+			    	 }
+			    		 
 			     }
+		     }
+		   
 		     	if(c=='N') {
 			    	 System.out.println("Thanks for using our service");
 			    	 System.out.println("_____________________________________________");
@@ -101,9 +195,9 @@ public class AccountDetails_Main {
 						DisplayDetails(acc.getValue());
 						
 					}
-				}
+				
 
-			
+		     }
 			}
 	
 	public static void DisplayDetails(AccountDetails acc) {
@@ -115,7 +209,7 @@ public class AccountDetails_Main {
 		System.out.println("Account Number :\t"+acc.getAccountNumber());
 		System.out.println("Amount in Account :\t"+acc.getAccountBalance());
 		System.out.println("Currency mode :\t\t"+acc.getCurrency());
-   	 System.out.println("_____________________________________________");
+   	 System.out.println("_____________________________________________\n");
 
 	}
 	
