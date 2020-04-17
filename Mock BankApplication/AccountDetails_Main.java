@@ -10,6 +10,8 @@ public class AccountDetails_Main {
 		var accountDetails=new HashMap<Long,AccountDetails>();
 			Scanner sc=new Scanner(System.in);
 			
+			System.out.println("******MOCK BANK APPLICATION******\n\n");
+			
 		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
 		     char c;
 		     c=sc.next().charAt(0);
@@ -19,6 +21,8 @@ public class AccountDetails_Main {
 		    	 AccountDetails account=new AccountDetails();		
 		    	 
 		    	 
+		    	 
+  //__________________________________________________________________________________
 		    	 
 				//1. Getting Input for type of Account
 				System.out.println("Enter the type of account:\n1.Savings\n2.Current\n");
@@ -42,27 +46,93 @@ public class AccountDetails_Main {
 					temp=sc.nextInt();
 				}
 				}
-			
+				
+				
+				
+				
+	//__________________________________________________________________________________
+		
 				
 				//2. Input for the Account holder name
+				while(true) {
+				
 				System.out.println("Enter the Account Holder Full Name : ");
-				account.setAccountName(sc.nextLine());
+				String name;
+				name=sc.nextLine();
+				if((name.length())!=0) {
+				account.setAccountName(name);
+				break;
+				}
+				else {
+						System.out.println("*****ENTER VALID NAME*****\n");
+				}
+				}
 				
 				
+				
+				
+   //__________________________________________________________________________________
+
 				//3. Input for the Account Number
-				System.out.println("Enter the Account Number : ");
-				account.setAccountNumber(sc.nextLong());
+				while(true) {
+					System.out.println("Enter account number: ");
+					String accnum=sc.nextLine();
+					if((accnum!=null)&&(accnum.length()>=10)) {
+						try {
+							account.setAccountNumber(Long.parseLong(accnum));
+							break;
+						}
+						catch(NumberFormatException e) {
+							System.out.println("*****PLEASE ENTER NUMERIC VALUES ONLY*****\n");
+						}
+					}
+			
+					else {
+						System.out.println("*****ENTER VALID ACCOUNT NUMBER GREATER THAN 10 DIGITS*****\n");
+						
+					}
 				
+				}
+				
+				
+  //__________________________________________________________________________________
+	
 				
 				//4. Input for the Amount
+				while(true) {
 				System.out.println("Enter the Amount : ");
-				account.setAccountBalance(sc.nextDouble());
+				//account.setAccountBalance(sc.nextDouble());
+				String amt=sc.nextLine();
+				if(amt!=null) {
+					try {
+					account.setAccountBalance(Double.parseDouble(amt));
+					break;
+				}
+					catch(NumberFormatException e) {
+						System.out.println("*****PLEASE ENTER NUMERIC VALUES ONLY*****\n");
+					}
+					
+							}
+				else {
+					System.out.println("*****PLEASE ENTER A NUMERIC VALUE*****\n");
+				}
+				}
 				
-				
+//__________________________________________________________________________________
+	
 				//5. Input for the currency
+				while(true) {
 				System.out.println("Enter the Currency : ");
-				account.setCurrency(sc.next());
-			
+				String cur=sc.nextLine();
+				if(cur!=null) {
+				account.setCurrency(cur);
+				break;
+				}
+				else {
+					System.out.println("*****PLEASE ENTER A CURRENCY*****\n");
+				}
+				}
+//__________________________________________________________________________________
 				
 				accountDetails.put(account.getAccountNumber(),account);
 		    	 System.out.println("_____________________________________________");
@@ -75,6 +145,7 @@ public class AccountDetails_Main {
 				System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
 				c=sc.next().charAt(0);
 		    	 }
+		    	 //Modifying the Account
 		    	 else if(c=='E') {
 		    		 
 				    	 long an;
