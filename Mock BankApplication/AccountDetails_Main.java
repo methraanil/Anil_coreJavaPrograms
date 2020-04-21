@@ -10,7 +10,7 @@ public class AccountDetails_Main {
 		var accountDetails=new HashMap<Long,AccountDetails>();
 			Scanner sc=new Scanner(System.in);
 			
-			System.out.println("******MOCK BANK APPLICATION******\n\n");
+			System.out.println("*******MOCK BANK APPLICATION******\n\n");
 			
 		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
 		     char c;
