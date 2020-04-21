@@ -12,7 +12,7 @@ public class AccountDetails_Main {
 			
 			System.out.println("******MOCK BANK APPLICATION******\n\n");
 			
-		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
 		     char c;
 		     c=sc.next().charAt(0);
 		     while(c != 'N') {
@@ -142,9 +142,12 @@ public class AccountDetails_Main {
 				
 				
 				
-				System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+				System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
 				c=sc.next().charAt(0);
 		    	 }
+//__________________________________________________________________________________
+		    	 
+
 		    	 //Modifying the Account
 		    	 else if(c=='E') {
 		    		 
@@ -214,18 +217,22 @@ public class AccountDetails_Main {
 				    	 else {
 				    		 System.out.println("*****ACCOUNT NOT FOUND*****\n");
 					    	 System.out.println("_____________________________________________");
-					 		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+					    	 System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
 								c=sc.next().charAt(0);
 				    	 }
 				    	 
 				    	 
 				     }
-		    	 else if((c!='Y')&&(c!='N')&&(c != 'E')&&(c!='V')) {
+//__________________________________________________________________________________
+		    	 
+		    	 else if((c!='Y')&&(c!='N')&&(c != 'E')&&(c!='V')&&(c!='D')) {
 			    	 System.out.println("Invalid option choosen");
 			    	 System.out.println("_____________________________________________");
 			 		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
 						c=sc.next().charAt(0);
 			     }
+//__________________________________________________________________________________
+    	 
 		    	 else if(c=='V') {
 		    		 long an;
 		    		 System.out.println("Enter the Account Number");
@@ -234,19 +241,82 @@ public class AccountDetails_Main {
 			    		 AccountDetails details=new AccountDetails();
 			    		 details=accountDetails.get(an);
 			    		 DisplayDetails(details);
-			    		 System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+			    		 System.out.println("Do you want to DEPOSIT or WITHDRAW:\n press Y: for Yes\n press any key : for No ");
+			    		 char y;
+			    		 y=sc.next().charAt(0);
+			    		 if(y=='Y') {
+			    			 while(true) {
+			    			 System.out.println("Select your option 1: Deposit\t2: Withdraw :");
+			    			 int p=sc.nextInt();
+			    			 if(p==1) {
+			    				 System.out.println("Enter the amount to Deposit: ");
+			    				 double amt=sc.nextDouble();
+			    				 details.setAccountBalance((details.getAccountBalance())+amt);
+			    				 System.out.println("UPDATED BALANCE: "+((details.getAccountBalance())+"\n"));
+			    				 break;
+			    			 }
+			    			 else if(p==2) {
+			    				 System.out.println("Enter the amount to Withdraw: ");
+			    				 while(true) {
+			    				 double amt1=sc.nextDouble();
+			    				 if((details.getAccountBalance()>=(amt1))){
+			    					 details.setAccountBalance((details.getAccountBalance())-amt1);
+			    					 System.out.println("UPDATED BALANCE: "+((details.getAccountBalance())+"\n"));			    					 break;
+			    				 }
+			    				 else {
+			    					 System.out.println("Please enter amount less than: "+details.getAccountBalance());
+			    				 }
+			    			 }
+			    		break;
+			    		 }
+			    			 else {
+			    				 System.out.println("*****PLEASE SELECT A VALID OPTION*****\n");
+			    			 }
+			    			 }
+			    		 }
+			    		 else {
+			    			 System.out.println("__________________________________________");
+			    		 }
+			    			 
+			    		 System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
 							c=sc.next().charAt(0);
 		    	 }
 			    	 else {
 			    		 System.out.println("*****ACCOUNT NOT FOUND*****\n");
 				    	 System.out.println("_____________________________________________");
-				 		System.out.println("Please select the option:\nY : For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nN: Close this Screen");
+				    	 System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
 							c=sc.next().charAt(0);
 			    	 }
 			    		 
 			     }
+//__________________________________________________________________________________
+
+			     else if(c=='D') {
+			    	 long an;
+			    	 while(true) {
+		    		 System.out.println("Enter the Account Number");
+		    		 
+			    	 an=sc.nextLong();
+			    	 if(accountDetails.containsKey(an)) {
+			    		accountDetails.remove(an);
+			    		System.out.println("*****ACCOUNT DELETED SUCCESSFULLY*****");
+			    		System.out.println("_____________________________________________");
+			    		System.out.println("Please select the option:\nY: For creating a new Account\nE: Update the details for an Existing account\nV: View the Account details\nD: Delete an account\nN: Close this Screen");
+							c=sc.next().charAt(0);
+			    		 break;
+			     }
+			    	 else {
+			    		 System.out.println("*****ACCOUNT NOT FOUND*****");
+			    		 System.out.println("___________________________________");
+			    	 }
+			     
+			     
+		    		 }
+			     }
+	//_____________________________________________________________________________________
+
 		     }
-		   
+ 		   
 		     	if(c=='N') {
 			    	 System.out.println("Thanks for using our service");
 			    	 System.out.println("_____________________________________________");
@@ -270,6 +340,7 @@ public class AccountDetails_Main {
 
 		     }
 			}
+//__________________________________________________________________________________
 	
 	public static void DisplayDetails(AccountDetails acc) {
 		
