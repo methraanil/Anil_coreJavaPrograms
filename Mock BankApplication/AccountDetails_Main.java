@@ -1,5 +1,4 @@
 package mba;
-
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Scanner;
@@ -55,18 +54,20 @@ public class AccountDetails_Main {
 				
 				//2. Input for the Account holder name
 				while(true) {
-				
-				System.out.println("Enter the Account Holder Full Name : ");
-				String name;
-				name=sc.nextLine();
-				if((name.length())!=0) {
-				account.setAccountName(name);
-				break;
-				}
-				else {
-						System.out.println("*****ENTER VALID NAME*****\n");
-				}
-				}
+					
+					System.out.println("Enter the Account Holder Full Name : ");
+					String name;
+					String pattern="^[ a-zA-Z]+$";
+					name=sc.nextLine();
+					if(((name.length())!=0)&&(name.matches(pattern))) {
+					account.setAccountName(name);
+					break;
+					}
+					else {
+							System.out.println("*****ENTER VALID NAME*****\n");
+					}
+					}
+					
 				
 				
 				
